@@ -19,13 +19,13 @@ use App\Http\Controllers\Projectviewcontroller;
 */
 
 Route::get('/', function () {
-    return view('pages.index');
+    return view('auth.login');
 });
 Route::resource('projects', projectcontroller::class);
 Route::get('display',[Projectviewcontroller::class,"show"]);
 Route::get('contact',[Contactcontroller::class,"show"]);
-Route::get('register',[AdminController::class,"register"]);
-Route::get('login',[AdminController::class,"login"]);
+// Route::get('register',[AdminController::class,"register"]);
+// Route::get('login',[AdminController::class,"login"]);
 
 
 
@@ -41,4 +41,9 @@ Route::get('/dashboard', function () {
 // Route::get('/edit', function () {
 //     return view('pages.Project_Edit');
 // });
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

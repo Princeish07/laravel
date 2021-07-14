@@ -65,24 +65,6 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-12">
-                  <h4>Recent Activity</h4>
-                    <div class="post">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                        <span class="username">
-                          <a href="#"> {{$project['project_name']}}.</a>
-                        </span>
-                        <span class="description">Shared publicly -{{$project['created_at']}}</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        {{$project['project_desc']}} 
-                      </p>
-                    </div>
-                </div>
-              </div>
             </div>
             <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
               <h3 class="text-primary"><i class="fas fa-paint-brush"></i> {{$project['project_name']}} </h3>
@@ -96,29 +78,24 @@
                   <b class="d-block">{{$project['project_leader']}}</b>
                 </p>
               </div>
-
+              @php
+               $projectfile=explode(",",$project['project_file']);
+              @endphp
               <h5 class="mt-5 text-muted">Project files</h5>
               <ul class="list-unstyled">
-                <li>
-                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Functional-requirements.docx</a>
+                @foreach($projectfile as $key)
+               <li>   
+                  <a href="#" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> {{$key}}</a>
+                
                 </li>
-                <li>
-                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-pdf"></i> UAT.pdf</a>
-                </li>
-                <li>
-                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-envelope"></i> Email-from-flatbal.mln</a>
-                </li>
-                <li>
-                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-image "></i> Logo.png</a>
-                </li>
-                <li>
-                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Contract-10_12_2014.docx</a>
-                </li>
+                @endforeach
               </ul>
-              <div class="text-center mt-5 mb-3">
-                <a href="#" class="btn btn-sm btn-primary">Add files</a>
-                <a href="#" class="btn btn-sm btn-warning">Report contact</a>
-              </div>
+              <form action="{{ route('projects.update',$project['project_id']) }}" method="POST" enctype="multipart/form-data">
+              @csrf  
+              @method("PUT")
+                <input type="file"  name="project_file[]" id="project_file" multiple><input type="submit" name="upload" >
+              </form>
+            </div>
             </div>
           </div>
         </div>

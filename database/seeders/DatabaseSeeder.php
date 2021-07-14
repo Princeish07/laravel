@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
             'phone' =>Str::random(10),
             'email'=>Str::random(10).'@gmail.com',
             'address'=>Str::random(10)
-        });
+        ]);
     }
 }

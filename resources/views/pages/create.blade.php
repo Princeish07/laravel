@@ -47,22 +47,10 @@
               <label>Project Team</label>
               <select multiple class="custom-select" name="project_team[]" id="project_team">
                 @foreach($data as $project)
-                 <option value="{{$project['user_id']}}">{{$project['username']}}</option>
+                 <option value="{{$project['id']}}">{{$project['username']}}</option>
                 @endforeach
               </select>
             </div>           
-            {{-- <div class="form-group">
-              <label for="exampleInputFile">File input</label>
-              <div class="input-group">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" name="project_file[]" id="project_file" multiple>
-                  <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                </div>
-                <div class="input-group-append">
-                  <span class="input-group-text">Upload</span>
-                </div>
-              </div>
-            </div> --}}
              <div class="form-group">
                <label for="inputStatus">Client Status</label>
                <select id="client_status" name="client_status" class="form-control custom-select">

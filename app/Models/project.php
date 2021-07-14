@@ -10,4 +10,5 @@ class project extends Model
     use HasFactory;
     public $table="projects";
     protected $primaryKey='project_id';
+    protected $fillable=['project_file'];
 }
