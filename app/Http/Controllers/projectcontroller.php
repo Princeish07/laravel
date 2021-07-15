@@ -20,11 +20,8 @@ class projectcontroller extends Controller
      */
     public function index()
     {
-        //
-        $data=project::join('project_budgets','project_budgets.project_id','=','projects.project_id')->get(['projects.*','project_budgets.estimated_budget']);
-        //$data=project::all()->toArray();
-        // dd($data);
-        $sno=0;
+
+        $data=project::with('project_budgets')->get();
         return view('pages.show',compact('data'));
     }
 
@@ -50,24 +47,23 @@ class projectcontroller extends Controller
     public function store(Request $request)
     {
         //
-
-      $request->file('project_file');
+      
       $project=new project();
+      $project_budget=new project_budget();
       $project->project_name=$request->project_name;
       $project->project_desc=$request->project_desc;
       $project->project_team=implode(',',$request->project_team);
       $project->client_status=$request->client_status;
       $project->client_company=$request->client_company;
-      $project->project_leader=$request->project_leader;
-      $id=$request->project_id;
+      $project->project_leader=$request->project_leader; 
       $project->save();
-      
-      $project_budget=new project_budget();
+
+      $id=$project->id; 
+      $project_budget->id=$request->id;
       $project_budget->project_id=$id;
       $project_budget->estimated_budget=$request->estimated_budget;
       $project_budget->amount_spent=$request->amount_spent;
       $project_budget->estimated_duration=$request->estimated_duration;
-      
       $project_budget->save();
       return redirect()->route('projects.index')
       ->with('success', 'Project created successfully.');
@@ -79,12 +75,10 @@ class projectcontroller extends Controller
      * @param   \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,$project_id )
+    public function show(Request $request,$id )
     {
-
-        $project_budget=project_budget::find($project_id)->toArray();
-        $project=project::find($project_id)->toArray();
-        return view('pages.Project_details', compact('project','project_budget'));
+        $project=project::with('project_budgets')->find($id);
+        return view('pages.Project_details', compact('project'));
     }
 
     /**
@@ -93,12 +87,11 @@ class projectcontroller extends Controller
      * @param   \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit($project_id)
+    public function edit($id)
     {
-        $data=user::all()->toArray();
-        $project_budget=project_budget::find($project_id)->toArray();
-        $project=project::find($project_id)->toArray();
-        return view('pages.Project_Edit',compact('project','project_budget'),compact('data'));
+        $data=user::all();
+        $project=project::with('project_budgets')->find($id);
+        return view('pages.Project_Edit',compact('project'),compact('data'));
     }
 
     /**
@@ -108,38 +101,28 @@ class projectcontroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $req, $project_id)
+    public function update(Request $req, $id)
     {
         //
         
         $files = [];
         if($req->hasfile('project_file'))
          {
-
-            $projectfile=implode(",",$req->file('project_file'));
-            //echo $projectfile;
-            
+            $projectfile=implode(",",$req->file('project_file')); 
             foreach($req->file('project_file') as $file=>$key)
             {
                 $newFilename=$key->getClientOriginalName();
-
-                //echo $newFilename;
-                
-                 $key->move(public_path('files'), $newFilename);  
+                 $key->move(public_path('storage'), $newFilename);  
                  array_push($files,$newFilename);
 
             }
             $projectfile=implode(",",$files);
-            //echo $projectfile;
-            //print_r($files);
-
-            //die("abc");
-            $project=project::find($project_id);
+            $project=project::find($id);
             $project->project_file = $projectfile;
             $project->update();
          }
         elseif($req->has('project_name')){
-        $project=project::find($project_id);
+        $project=project::find($id);
         $project->project_name=$req->project_name;
         $project->project_desc=$req->project_desc;
         $project->project_team=implode(",",$req->project_team);
@@ -147,7 +130,7 @@ class projectcontroller extends Controller
         $project->client_company=$req->client_company;
         $project->project_leader=$req->project_leader;
         $project->update();
-        $project_budget=project_budget::find($project_id);
+        $project_budget=project_budget::find($id);
         $project_budget->estimated_budget=$req->estimated_budget;
         $project_budget->amount_spent=$req->amount_spent;
         $project_budget->estimated_duration=$req->estimated_duration;
@@ -164,13 +147,10 @@ class projectcontroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($project_id)
+    public function destroy($id)
     {
-        //
-        $project=project::find($project_id);
+        $project=project::with('project_budgets')->find($id);
         $project->delete();
-        $project_budget=project_budget::find($project_id);
-        $project_budget->delete();
         //return view('pages.show');
         //return \Redirect::route('display');
          return redirect()->route('projects.index')

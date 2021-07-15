@@ -9,6 +9,10 @@ class project extends Model
 {
     use HasFactory;
     public $table="projects";
-    protected $primaryKey='project_id';
-    protected $fillable=['project_file'];
+    
+    public function project_budgets()
+    {
+        return $this->hasOne(project_budget::class);
+        // note: we can also include comment model like: 'App\Models\Comment'
+    }
 }

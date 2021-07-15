@@ -69,7 +69,7 @@
                 @endphp
                  <tr>
                      <td>
-                      {{ ++$i}}
+                      {{ ++$i;}}
                      </td>
                      <td>
                          <a>
@@ -91,16 +91,16 @@
                          <span class="badge badge-success">Success</span>
                      </td>
                      <td class="project-state">
-                         <span class="badge badge-success">{{ $project['estimated_budget']}}</span>
+                         <span class="badge badge-success">{{$project->project_budgets->estimated_budget}}</span>
                      </td>
-                     <form action="{{ route('projects.destroy', $project['project_id']) }}" method="POST">
+                     <form action="{{ route('projects.destroy', $project['id']) }}" method="POST">
                      <td class="project-actions text-right">
-                         <a class="btn btn-primary btn-sm" href="{{ route('projects.show',$project['project_id']) }}">
+                         <a class="btn btn-primary btn-sm" href="{{ route('projects.show',$project['id']) }}">
                              <i class="fas fa-folder">
                              </i>
                              View
                          </a>
-                         <a class="btn btn-info btn-sm" href="{{ route('projects.edit',$project['project_id']) }}">
+                         <a class="btn btn-info btn-sm" href="{{ route('projects.edit',$project['id']) }}">
                              <i class="fas fa-pencil-alt">
                              </i>
                              Edit

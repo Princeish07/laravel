@@ -1,5 +1,5 @@
-@extends('layouts.layout');
-@section('content');
+@extends('layouts.layout')
+@section('content')
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
    <!-- Content Header (Page header) -->
@@ -31,11 +31,11 @@
                </button>
              </div>
            </div>
-           <form action="{{ route('projects.update',$project['project_id']) }}" method='POST' enctype="multipart/form-data">
+           <form action="{{ route('projects.update',$project['id']) }}" method='POST' enctype="multipart/form-data">
             @csrf
-            @method("PUT");
+            @method("PUT")
            <div class="card-body">
-            <input type="hidden" id="project_id" name="project_id"  class="form-control">
+            <input type="hidden" id="id" name="id"  class="form-control">
              <div class="form-group">
                <label for="inputName">Project Name</label>
                <input type="text" id="project_name" name="project_name" value="{{$project['project_name'] }}"  class="form-control">
@@ -48,7 +48,7 @@
               <label>Project Team</label>
               <select multiple class="custom-select" name="project_team[]" id="project_team">
                 @foreach($data as $team)
-                 <option value="{{$team['id']}}">{{$team['username']}}</option>
+                 <option value="{{$team['id']}}">{{$team['name']}}</option>
                 @endforeach
               </select>
             </div>           
@@ -87,15 +87,15 @@
            <div class="card-body">
              <div class="form-group">
                <label for="inputEstimatedBudget">Estimated budget</label>
-               <input type="number" id="estimated_budget" value="{{$project_budget['estimated_budget']}}" name="estimated_budget" class="form-control">
+               <input type="number" id="estimated_budget" value="{{$project->project_budgets['estimated_budget']}}" name="estimated_budget" class="form-control">
              </div>
              <div class="form-group">
                <label for="inputSpentBudget">Total amount spent</label>
-               <input type="number" id="amount_spent" name="amount_spent" value="{{$project_budget['amount_spent']}}" class="form-control">
+               <input type="number" id="amount_spent" name="amount_spent" value="{{$project->project_budgets['amount_spent']}}" class="form-control">
              </div>
              <div class="form-group">
                <label for="inputEstimatedDuration">Estimated project duration</label>
-               <input type="number" id="estimated_duration" value="{{$project_budget['estimated_duration']}}" name="estimated_duration" class="form-control">
+               <input type="number" id="estimated_duration" value="{{$project->project_budgets['estimated_duration']}}" name="estimated_duration" class="form-control">
              </div>
            </div>
            <!-- /.card-body -->
@@ -112,6 +112,6 @@
    </section>
   </form>
    <!-- /.content -->
- </div>
+
  <!-- /.content-wrapper -->
-@endsection;
+@endsection

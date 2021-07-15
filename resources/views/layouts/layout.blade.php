@@ -215,7 +215,7 @@
              <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{ url('/display') }}" class="nav-link">
+            <a href="{{ route('projects.index') }}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Projects</p>
             </a>
@@ -231,40 +231,6 @@
               <i class="far fa-circle nav-icon"></i>
               <p>Contacts</p>
             </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
-              <p>
-                Extras
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>
-                    Login & Register v1
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Login v1</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Register v1</p>
-                    </a>
-                 </li>
-               </ul>
-             </li>
-           </ul>
           </li>
        </ul>
       </nav>

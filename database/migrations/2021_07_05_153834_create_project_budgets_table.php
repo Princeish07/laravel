@@ -14,10 +14,13 @@ class CreateProjectBudgetsTable extends Migration
     public function up()
     {
         Schema::create('project_budgets', function (Blueprint $table) {
-            $table->id('project_id');
+            $table->id();
+            $table->unsignedBigInteger('project_id');
             $table->integer('estimated_budget');
             $table->integer('amount_spent');
             $table->integer('estimated_duration');
+            $table->foreign('project_id')->references('id')->on('projects')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

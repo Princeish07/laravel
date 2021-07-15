@@ -44,7 +44,7 @@
                   <div class="info-box bg-light">
                     <div class="info-box-content">
                       <span class="info-box-text text-center text-muted">Estimated budget</span>
-                      <span class="info-box-number text-center text-muted mb-0">{{$project_budget['estimated_budget']}}</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{$project->project_budgets->estimated_budget}}</span>
                     </div>
                   </div>
                 </div>
@@ -52,7 +52,7 @@
                   <div class="info-box bg-light">
                     <div class="info-box-content">
                       <span class="info-box-text text-center text-muted">Total amount spent</span>
-                      <span class="info-box-number text-center text-muted mb-0">{{$project_budget['amount_spent']}}</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{$project->project_budgets->amount_spent}}</span>
                     </div>
                   </div>
                 </div>
@@ -60,7 +60,7 @@
                   <div class="info-box bg-light">
                     <div class="info-box-content">
                       <span class="info-box-text text-center text-muted">Estimated project duration</span>
-                      <span class="info-box-number text-center text-muted mb-0">{{$project_budget['estimated_duration']}}</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{$project->project_budgets->estimated_duration}}</span>
                     </div>
                   </div>
                 </div>
@@ -85,12 +85,12 @@
               <ul class="list-unstyled">
                 @foreach($projectfile as $key)
                <li>   
-                  <a href="#" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> {{$key}}</a>
+                  <a href="/storage\{{$key}}" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> {{$key}}</a>
                 
                 </li>
                 @endforeach
               </ul>
-              <form action="{{ route('projects.update',$project['project_id']) }}" method="POST" enctype="multipart/form-data">
+              <form action="{{ route('projects.update',$project['id']) }}" method="POST" enctype="multipart/form-data">
               @csrf  
               @method("PUT")
                 <input type="file"  name="project_file[]" id="project_file" multiple><input type="submit" name="upload" >

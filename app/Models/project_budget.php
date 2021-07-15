@@ -9,7 +9,13 @@ class project_budget extends Model
 {
     use HasFactory;
     public $table="project_budgets";
-    protected $primaryKey='project_id';
+
+
+    public function project()
+    {
+        return $this->belongsTo(project::class);
+    }
+
 
 
 }

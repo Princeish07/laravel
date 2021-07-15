@@ -1,5 +1,5 @@
-@extends('layouts.layout');
-@section('content');
+@extends('layouts.layout')
+@section('content')
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
    <!-- Content Header (Page header) -->
@@ -32,22 +32,22 @@
              </div>
            </div>
            <form action="{{route('projects.store')}}" method='POST' enctype="multipart/form-data">
-            @csrf
-           <div class="card-body">
-            <input type="hidden" id="project_id" name="project_id" class="form-control">
-             <div class="form-group">
-               <label for="inputName">Project Name</label>
-               <input type="text" id="project_name" name="project_name" class="form-control">
-             </div>
-             <div class="form-group">
-               <label for="inputDescription">Project Description</label>
-               <textarea id="project_desc" name="project_desc"class="form-control" rows="4"></textarea>
-             </div>
+             @csrf
+            <div class="card-body">
+             <input type="hidden" id="id" name="id" class="form-control">
+              <div class="form-group">
+                <label for="inputName">Project Name</label>
+                <input type="text" id="project_name" name="project_name" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputDescription">Project Description</label>
+                <textarea id="project_desc" name="project_desc"class="form-control" rows="4"></textarea>
+              </div>
             <div class="form-group">
               <label>Project Team</label>
               <select multiple class="custom-select" name="project_team[]" id="project_team">
                 @foreach($data as $project)
-                 <option value="{{$project['id']}}">{{$project['username']}}</option>
+                 <option value="{{$project['id']}}">{{$project['name']}}</option>
                 @endforeach
               </select>
             </div>           
@@ -108,9 +108,7 @@
          <input type="submit" name="submit" value="Create new Porject" class="btn btn-success float-right">
        </div>
      </div>
-   </section>
-  </form>
-   <!-- /.content -->
- </div>
+     </form>
+  </section>
  <!-- /.content-wrapper -->
-@endsection;
+@endsection
