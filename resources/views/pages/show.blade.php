@@ -69,7 +69,7 @@
                 @endphp
                  <tr>
                      <td>
-                      {{ ++$i;}}
+                     {{ $project['id']}}
                      </td>
                      <td>
                          <a>

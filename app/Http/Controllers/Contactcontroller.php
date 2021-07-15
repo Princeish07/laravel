@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\user;
+use App\Models\Contact;
 
-class Contactcontroller extends Controller
+class ContactController extends Controller
 {
     public function show()
     {
-        $data=user::all()->toArray();
+        $data=Contact::all()->toArray();
         return view('Pages.contact',compact('data'));
     }
     

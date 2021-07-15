@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\project;
-use App\Models\projects;
-
-use App\Models\project_budget;
-use App\Models\user;
+use App\Models\Project;
+use App\Models\ProjectBudget;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use CreateProjectsTable;
 
-class projectcontroller extends Controller
+class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +19,7 @@ class projectcontroller extends Controller
     public function index()
     {
 
-        $data=project::with('project_budgets')->get();
+        $data=Project::with('project_budgets')->get();
         return view('pages.show',compact('data'));
     }
 
@@ -33,7 +31,7 @@ class projectcontroller extends Controller
     public function create()
     {
         //
-        $data=user::all()->toArray();
+        $data=User::all()->toArray();
         return view('pages.create',compact('data'));
 
     }
@@ -48,8 +46,8 @@ class projectcontroller extends Controller
     {
         //
       
-      $project=new project();
-      $project_budget=new project_budget();
+      $project=new Project();
+      $project_budget=new ProjectBudget();
       $project->project_name=$request->project_name;
       $project->project_desc=$request->project_desc;
       $project->project_team=implode(',',$request->project_team);
@@ -77,7 +75,7 @@ class projectcontroller extends Controller
      */
     public function show(Request $request,$id )
     {
-        $project=project::with('project_budgets')->find($id);
+        $project=Project::with('project_budgets')->find($id);
         return view('pages.Project_details', compact('project'));
     }
 
@@ -89,8 +87,8 @@ class projectcontroller extends Controller
      */
     public function edit($id)
     {
-        $data=user::all();
-        $project=project::with('project_budgets')->find($id);
+        $data=User::all();
+        $project=Project::with('project_budgets')->find($id);
         return view('pages.Project_Edit',compact('project'),compact('data'));
     }
 
@@ -117,12 +115,12 @@ class projectcontroller extends Controller
 
             }
             $projectfile=implode(",",$files);
-            $project=project::find($id);
+            $project=Project::find($id);
             $project->project_file = $projectfile;
             $project->update();
          }
         elseif($req->has('project_name')){
-        $project=project::find($id);
+        $project=Project::find($id);
         $project->project_name=$req->project_name;
         $project->project_desc=$req->project_desc;
         $project->project_team=implode(",",$req->project_team);
@@ -130,7 +128,7 @@ class projectcontroller extends Controller
         $project->client_company=$req->client_company;
         $project->project_leader=$req->project_leader;
         $project->update();
-        $project_budget=project_budget::find($id);
+        $project_budget=ProjectBudget::find($id);
         $project_budget->estimated_budget=$req->estimated_budget;
         $project_budget->amount_spent=$req->amount_spent;
         $project_budget->estimated_duration=$req->estimated_duration;
@@ -149,10 +147,8 @@ class projectcontroller extends Controller
      */
     public function destroy($id)
     {
-        $project=project::with('project_budgets')->find($id);
+        $project=Project::find($id);
         $project->delete();
-        //return view('pages.show');
-        //return \Redirect::route('display');
          return redirect()->route('projects.index')
             ->with('success', 'Project deleted successfully');
     }

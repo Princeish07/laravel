@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\projectcontroller;
-use App\Http\Controllers\Contactcontroller;
-use App\Http\Controllers\Projectviewcontroller;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProjectviewController;
 
 
 /*
@@ -21,9 +21,9 @@ use App\Http\Controllers\Projectviewcontroller;
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::resource('projects', projectcontroller::class);
-Route::get('display',[Projectviewcontroller::class,"show"]);
-Route::get('contact',[Contactcontroller::class,"show"]);
+Route::resource('projects', ProjectController::class);
+Route::get('display',[ProjectviewController::class,"show"]);
+Route::get('contact',[ContactController::class,"show"]);
 // Route::get('register',[AdminController::class,"register"]);
 // Route::get('login',[AdminController::class,"login"]);
 
