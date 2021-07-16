@@ -24,24 +24,9 @@ Route::get('/', function () {
 Route::resource('projects', ProjectController::class);
 Route::get('display',[ProjectviewController::class,"show"]);
 Route::get('contact',[ContactController::class,"show"]);
-// Route::get('register',[AdminController::class,"register"]);
-// Route::get('login',[AdminController::class,"login"]);
-
-
-
-
-
-
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
 });
-// Route::get('/add', function () {
-//     return view('pages.Project_Add');
-// });
-// Route::get('/edit', function () {
-//     return view('pages.Project_Edit');
-// });
-
 
 Auth::routes();
 

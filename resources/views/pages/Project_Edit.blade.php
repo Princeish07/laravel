@@ -56,9 +56,26 @@
                <label for="inputStatus">Client Status</label>
                <select id="client_status" name="client_status" class="form-control custom-select">
                  <option selected>{{$project['client_status'] }}</option>
-                 <option>On Hold</option>
-                 <option>Canceled</option>
-                 <option>Success</option>
+                 @php
+                  if($project['client_status'] == "On Hold")
+                    {@endphp                          
+                    <option>Canceled</option>
+                    <option>Success</option>
+                   @php } @endphp
+ 
+                   @php                
+                   if($project['client_status'] == "Canceled")
+                    {@endphp 
+                    <option>On Hold</option>
+                    <option>Success</option>
+                    @php } @endphp
+                    
+                    @php
+                   if($project['client_status'] == "Success")
+                    {@endphp 
+                    <option>On Hold</option>
+                    <option>Canceled</option>
+                    @php } @endphp
                </select>
              </div>
              <div class="form-group">
