@@ -57,7 +57,7 @@ class ProjectController extends Controller
       $project_budget->amount_spent=$request->amount_spent;
       $project_budget->estimated_duration=$request->estimated_duration;
       $project_budget->save();
-      return redirect()->route('projects.index');
+      return redirect()->route('projects.create')->with('success', 'Project created successfully.');
     }
 
     /**

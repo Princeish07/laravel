@@ -1,6 +1,11 @@
 @extends('layouts.layout')
 @section('content')
  <!-- Content Wrapper. Contains page content -->
+ @if ($message = Session::get('success'))
+        <div class="alert alert-danger" style="text-align:center; font-size:15px">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
  <div class="content-wrapper">
    <!-- Content Header (Page header) -->
    <section class="content-header">
