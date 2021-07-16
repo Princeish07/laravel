@@ -1,6 +1,21 @@
 @extends('layouts.layout');
 @section('content');
 <!-- Content Wrapper. Contains page content -->
+@if ($message = Session::get('delete'))
+        <div class="alert alert-danger" style="text-align:center; font-size:20px">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success" style="text-align:center; font-size:20px">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+    @if ($message = Session::get('edit'))
+        <div class="alert alert-success" style="text-align:center; font-size:20px">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
 <div class="content-wrapper">
    <!-- Content Header (Page header) -->
    <section class="content-header">
