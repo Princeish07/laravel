@@ -32,55 +32,55 @@
              </div>
            </div>
            <form action="{{ route('projects.update',$project['id']) }}" method='POST' enctype="multipart/form-data">
-            @csrf
-            @method("PUT")
-            @php
-            $team= explode(",",$project['project_team']);
+              @csrf
+              @method("PUT")
+              @php
+               $team= explode(",",$project['project_team']);
               @endphp
-           <div class="card-body">
-            <input type="hidden" id="id" name="id"  class="form-control">
-             <div class="form-group">
-               <label for="inputName">Project Name</label>
-               <input type="text" id="project_name" name="project_name" value="{{$project['project_name'] }}"  class="form-control">
-             </div>
-             <div class="form-group">
-               <label for="inputDescription">Project Description</label>
-               <textarea id="project_desc" name="project_desc" class="form-control" rows="4">{{$project['project_desc'] }}</textarea>
-             </div>
-            <div class="form-group">
-              <label>Project Team</label>
-              <select multiple class="custom-select" name="project_team[]" id="project_team">
-                @foreach($data as $user)
-                  @php  
-                  if(in_array($user['id'], $team))
-                  { @endphp
-                    <option value="{{ $user['id'] }}" selected>{{ $user['name'] }}</option>
-                  @php }  
-                  else
-                  { @endphp
-                      <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>            
-                   @php } @endphp    
-                @endforeach
-              </select>
-            </div>           
-             <div class="form-group">
-               <label for="inputStatus">Client Status</label>
-               <select id="client_status" name="client_status" class="form-control custom-select">
-                 <option selected>{{$project['client_status'] }}</option>
-                  @if($project['client_status'] == "On Hold")                         
-                    <option>Canceled</option>
-                    <option>Success</option>
-                  @endif                
-                  @if($project['client_status'] == "Canceled")
-                    <option>On Hold</option>
-                    <option>Success</option>
-                  @endif
-                  @if($project['client_status'] == "Success")
-                    <option>On Hold</option>
-                    <option>Canceled</option>
-                  @endif
-               </select>
-             </div>
+              <div class="card-body">
+              <input type="hidden" id="id" name="id"  class="form-control">
+               <div class="form-group">
+                 <label for="inputName">Project Name</label>
+                 <input type="text" id="project_name" name="project_name" value="{{$project['project_name'] }}"  class="form-control">
+               </div>
+               <div class="form-group">
+                 <label for="inputDescription">Project Description</label>
+                 <textarea id="project_desc" name="project_desc" class="form-control" rows="4">{{$project['project_desc'] }}</textarea>
+               </div>
+              <div class="form-group">
+                <label>Project Team</label>
+                <select multiple class="custom-select" name="project_team[]" id="project_team">
+                  @foreach($data as $user)
+                    @php  
+                    if(in_array($user['id'], $team))
+                    { @endphp
+                      <option value="{{ $user['id'] }}" selected>{{ $user['name'] }}</option>
+                    @php }  
+                    else
+                    { @endphp
+                        <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>            
+                     @php } @endphp    
+                  @endforeach
+                </select>
+              </div>           
+                <div class="form-group">
+                  <label for="inputStatus">Client Status</label>
+                  <select id="client_status" name="client_status" class="form-control custom-select">
+                    <option selected>{{$project['client_status'] }}</option>
+                     @if($project['client_status'] == "On Hold")                         
+                       <option>Canceled</option>
+                       <option>Success</option>
+                     @endif                
+                     @if($project['client_status'] == "Canceled")
+                       <option>On Hold</option>
+                       <option>Success</option>
+                     @endif
+                     @if($project['client_status'] == "Success")
+                       <option>On Hold</option>
+                       <option>Canceled</option>
+                     @endif
+                  </select>
+                </div>
              <div class="form-group">
                <label for="inputClientCompany">Client Company</label>
                <input type="text" id="client_company" value="{{$project['client_company'] }}" name="client_company" class="form-control">
