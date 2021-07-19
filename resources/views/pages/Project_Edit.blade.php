@@ -34,6 +34,9 @@
            <form action="{{ route('projects.update',$project['id']) }}" method='POST' enctype="multipart/form-data">
             @csrf
             @method("PUT")
+            @php
+            $team= explode(",",$project['project_team']);
+              @endphp
            <div class="card-body">
             <input type="hidden" id="id" name="id"  class="form-control">
              <div class="form-group">
@@ -47,8 +50,16 @@
             <div class="form-group">
               <label>Project Team</label>
               <select multiple class="custom-select" name="project_team[]" id="project_team">
-                @foreach($data as $team)
-                 <option value="{{$team['id']}}">{{$team['name']}}</option>
+                @foreach($data as $user)
+                  @php  
+                  if(in_array($user['id'], $team))
+                  { @endphp
+                    <option value="{{ $user['id'] }}" selected>{{ $user['name'] }}</option>
+                  @php }  
+                  else
+                  { @endphp
+                      <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>            
+                   @php } @endphp    
                 @endforeach
               </select>
             </div>           
@@ -56,26 +67,18 @@
                <label for="inputStatus">Client Status</label>
                <select id="client_status" name="client_status" class="form-control custom-select">
                  <option selected>{{$project['client_status'] }}</option>
-                 @php
-                  if($project['client_status'] == "On Hold")
-                    {@endphp                          
+                  @if($project['client_status'] == "On Hold")                         
                     <option>Canceled</option>
                     <option>Success</option>
-                   @php } @endphp
- 
-                   @php                
-                   if($project['client_status'] == "Canceled")
-                    {@endphp 
+                  @endif                
+                  @if($project['client_status'] == "Canceled")
                     <option>On Hold</option>
                     <option>Success</option>
-                    @php } @endphp
-                    
-                    @php
-                   if($project['client_status'] == "Success")
-                    {@endphp 
+                  @endif
+                  @if($project['client_status'] == "Success")
                     <option>On Hold</option>
                     <option>Canceled</option>
-                    @php } @endphp
+                  @endif
                </select>
              </div>
              <div class="form-group">

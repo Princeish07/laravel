@@ -1,11 +1,7 @@
 @extends('layouts.layout')
 @section('content')
  <!-- Content Wrapper. Contains page content -->
- @if ($message = Session::get('success'))
-        <div class="alert alert-danger" style="text-align:center; font-size:15px">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
+
  <div class="content-wrapper">
    <!-- Content Header (Page header) -->
    <section class="content-header">
@@ -39,7 +35,6 @@
            <form action="{{route('projects.store')}}" method='POST' enctype="multipart/form-data">
              @csrf
             <div class="card-body">
-             <input type="hidden" id="id" name="id" class="form-control">
               <div class="form-group">
                 <label for="inputName">Project Name</label>
                 <input type="text" id="project_name" name="project_name" class="form-control">
