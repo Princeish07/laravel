@@ -12,7 +12,7 @@
          </div>
          <div class="col-sm-6">
            <ol class="breadcrumb float-sm-right">
-             <li class="breadcrumb-item"><a href="#">Home</a></li>
+             <li class="breadcrumb-item"><a href="/home">Home</a></li>
              <li class="breadcrumb-item active">Project Add</li>
            </ol>
          </div>
@@ -37,7 +37,7 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="inputName">Project Name</label>
-                <input type="text" id="project_name" name="project_name" class="form-control">
+                <input type="text" id="project_name" name="project_name" class="form-control" required>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Project Description</label>
@@ -86,15 +86,15 @@
            <div class="card-body">
              <div class="form-group">
                <label for="inputEstimatedBudget">Estimated budget</label>
-               <input type="number" id="estimated_budget" name="estimated_budget" class="form-control">
+               <input type="number" id="estimated_budget" name="estimated_budget" class="form-control" required>
              </div>
              <div class="form-group">
                <label for="inputSpentBudget">Total amount spent</label>
-               <input type="number" id="amount_spent" name="amount_spent" class="form-control">
+               <input type="number" id="amount_spent" name="amount_spent" class="form-control" required>
              </div>
              <div class="form-group">
                <label for="inputEstimatedDuration">Estimated project duration</label>
-               <input type="number" id="estimated_duration" name="estimated_duration" class="form-control">
+               <input type="number" id="estimated_duration" name="estimated_duration" class="form-control" required>
              </div>
            </div>
            <!-- /.card-body -->

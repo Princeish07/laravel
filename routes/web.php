@@ -24,9 +24,7 @@ Route::get('/', function () {
 Route::resource('projects', ProjectController::class);
 Route::get('display',[ProjectviewController::class,"show"]);
 Route::get('contact',[ContactController::class,"show"]);
-Route::get('/dashboard', function () {
-    return view('pages.dashboard');
-});
+
 
 Auth::routes();
 
